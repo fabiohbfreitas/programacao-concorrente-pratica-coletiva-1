@@ -51,7 +51,7 @@ public class Main {
   		return randomNum;
   	}
   	
-	//MARK: Returns an array of guests (family)
+	//MARK: Create new guests and assign them a family ID 
 	public static  void createFamily(int familyNum, Hotel hotel) {
 		int familySize = randomFamilySize();
 		
