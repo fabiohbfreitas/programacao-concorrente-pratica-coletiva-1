@@ -24,7 +24,7 @@ public class Receptionist extends Thread {
 //                System.out.println(this.getName() + " checking wait queue");
                 hotel.checkRoomAndGuest(this);
                 Thread.sleep(400);
-                hotel.checkCityGuests(this);
+                hotel.assignRoomKeysToCityGuests(this);
                 Thread.sleep(400);
 
             } catch (Exception e) {

@@ -26,21 +26,22 @@ public class Guest extends Thread {
                     break;
                 }
                 if (currentRoom != null) {
-                    if (n > 1) {
+                    if (n > 1 && !currentRoom.guests.isEmpty()) {
                         hotel.checkout(this);
                         break;
                     }
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(500));
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
-                    n += 1;
+
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
-                    if (!this.currentRoom.guests.isEmpty()){
+                    if (!this.currentRoom.guests.isEmpty() && n < 1){
                         goesForWalk(this);
                     }
+                      n += 1;
                     continue;
                 }
 
-                if (waitTimes >= 10) {
+                if (waitTimes >= 20) {
                     hotel.leave(this);
                     break;
                 }

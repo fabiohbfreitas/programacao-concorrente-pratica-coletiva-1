@@ -70,7 +70,7 @@ public class Hotel {
 
     private Queue<Room> createRooms() {
         var rooms = new LinkedList<Room>();
-        for (int n = 0; n < 4; n++) {
+        for (int n = 0; n < 3; n++) {
             rooms.add(new Room("Room " + n));
         }
         return rooms;
@@ -88,18 +88,24 @@ public class Hotel {
         lock.unlock();
     }
 
-    public void checkCityGuests(Receptionist receptionist) {
-        lock.lock();
+    public void assignRoomKeysToCityGuests(Receptionist receptionist) {
+    // Acquire lock to ensure thread safety
+    lock.lock();
+    try {
         if (!awaitingCityGuests.isEmpty()) {
-            var guest = awaitingCityGuests.poll();
-            var currentRoom = guest.currentRoom;
-            if(!awaitingCleaning.contains(currentRoom)) {
-                receptionist.giveKeys(currentRoom,guest);
-                System.out.println(receptionist.getName() + " return the " + currentRoom.name + " keys to " + guest.getName());
+            var guest = awaitingCityGuests.element();
+            if (!awaitingCleaning.contains(guest.currentRoom)) {
+                receptionist.giveKeys(guest.currentRoom, guest);
+                System.out.println(receptionist.getName() + " returned the keys to " + guest.getName() + " for room " + guest.currentRoom.name);
+                awaitingCityGuests.remove(guest);
             }
         }
+    } finally {
+
         lock.unlock();
     }
+}
+
 
     public void receptionStoreKeys(Room room, Guest guest) {
         lock.lock();
