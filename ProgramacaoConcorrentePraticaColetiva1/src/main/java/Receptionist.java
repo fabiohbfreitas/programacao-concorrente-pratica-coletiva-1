@@ -1,4 +1,7 @@
+
 import java.util.List;
+
+
 
 public class Receptionist extends Thread {
     Hotel hotel;
@@ -8,6 +11,7 @@ public class Receptionist extends Thread {
         this.hotel = hotel;
     }
 
+
     public void giveKeys(Room room, Family family) {
         room.guests = (family.members);
         family.currentRoom = room;
@@ -16,10 +20,12 @@ public class Receptionist extends Thread {
 
     @Override
     public void run() {
-        while (!hotel.finished.get()) {
+        while (!hotel.finished.get()) // AtomicBoolean {
             try {
 //                System.out.println(this.getName() + " checking wait queue");
                 hotel.checkRoomAndGuest(this);
+                Thread.sleep(400);
+                hotel.checkCityGuests(this);
                 Thread.sleep(400);
 
             } catch (Exception e) {
@@ -27,4 +33,4 @@ public class Receptionist extends Thread {
             }
         }
     }
-}
+

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 
 public class Main {
+
 	private static final int MIN_FAMILY_SIZE = 2;
 	private static final int MAX_FAMILY_SIZE = 6; // Change this to whatever maximum size you want
+
 
 	public static void main(String[] args) {
 		var hotel = new Hotel();

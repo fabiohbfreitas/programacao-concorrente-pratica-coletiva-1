@@ -13,6 +13,7 @@ public class Hotel {
     Queue<Room> availableRooms;
     List<Room> occupiedRooms;
     Queue<Room> awaitingCleaning;
+    Queue<Guest> awaitingCityGuests;
 
     public AtomicBoolean finished = new AtomicBoolean(false);
 
@@ -23,6 +24,7 @@ public class Hotel {
         availableRooms = createRooms();
         occupiedRooms = new ArrayList<>();
         awaitingCleaning = new LinkedList<>();
+        awaitingCityGuests = new LinkedList<>();
 
         startReceptionists();
         startMaids();
@@ -82,9 +84,29 @@ public class Hotel {
             receptionist.giveKeys(room, family);
             System.out.println(receptionist.getName() + " gave the room " + room.name + " to family " + family.familyID);
         }
+
         lock.unlock();
     }
 
+    public void checkCityGuests(Receptionist receptionist) {
+        lock.lock();
+        if (!awaitingCityGuests.isEmpty()) {
+            var guest = awaitingCityGuests.poll();
+            var currentRoom = guest.currentRoom;
+            if(!awaitingCleaning.contains(currentRoom)) {
+                receptionist.giveKeys(currentRoom,guest);
+                System.out.println(receptionist.getName() + " return the room " + currentRoom.name + "keys to " + guest.getName());
+            }
+        }
+        lock.unlock();
+    }
+
+    public void receptionStoreKeys(Room room, Guest guest) {
+        lock.lock();
+        awaitingCleaning.add(guest.currentRoom);
+        room.guests.remove(guest);
+        lock.unlock();
+    }
 
     public void checkout(Guest guest) {
         lock.lock();
@@ -95,6 +117,7 @@ public class Hotel {
         System.out.println(guest.getName() + " checked out from " + guestRoom.name);
         lock.unlock();
     }
+
 
     public void checkDirtyRooms(Maid maid) {
         lock.lock();
