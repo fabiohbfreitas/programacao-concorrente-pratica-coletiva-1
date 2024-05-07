@@ -1,12 +1,16 @@
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Guest extends Thread {
     Hotel hotel;
     Room currentRoom;
+    Lock lock;
 
     public Guest(String name, Hotel hotel) {
         super(name);
         this.hotel = hotel;
+        lock = new ReentrantLock(true);
     }
 
     @Override
@@ -15,6 +19,7 @@ public class Guest extends Thread {
         System.out.println(this.getName() + " arrived.");
         int waitTimes = 0;
         int n = 0;
+
         while (true) {
             try {
                 if (hotel.finished.get()) {
@@ -29,7 +34,9 @@ public class Guest extends Thread {
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
                     n += 1;
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
-                    goesForWalk(this);
+                    if (!this.currentRoom.guests.isEmpty()){
+                        goesForWalk(this);
+                    }
                     continue;
                 }
 
@@ -47,17 +54,19 @@ public class Guest extends Thread {
             }
         }
 
+
     }
 
- public void goesForWalk(Guest guest)  {
+ public void goesForWalk(Guest guest) {
         try {
+            lock.lock();
+            Thread.sleep(500 + ThreadLocalRandom.current().nextInt(5000));
             hotel.awaitingCityGuests.add(guest);
             System.out.println(guest.getName() + "Goes for a walk in the city...");
 
-           hotel.receptionStoreKeys(guest.currentRoom, guest);
+            hotel.receptionStoreKeys(guest.currentRoom, guest);
             Thread.sleep(2000);
-
-
+            lock.unlock();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

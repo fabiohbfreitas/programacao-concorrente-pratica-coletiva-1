@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcc3e234-9c5e-4cf3-a296-1f79b443c06c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Guest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Hotel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Maid.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Maid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Receptionist.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Receptionist.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715038371977</updated>
       <workItem from="1715038372980" duration="2486000" />
-      <workItem from="1715040868874" duration="12761000" />
+      <workItem from="1715040868874" duration="14810000" />
     </task>
     <servers />
   </component>
