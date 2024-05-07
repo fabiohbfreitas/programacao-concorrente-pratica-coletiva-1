@@ -89,7 +89,6 @@ public class Hotel {
     }
 
     public void assignRoomKeysToCityGuests(Receptionist receptionist) {
-    // Acquire lock to ensure thread safety
     lock.lock();
     try {
         if (!awaitingCityGuests.isEmpty()) {
