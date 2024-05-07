@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         var hotel = new Hotel();
-        for (var i = 0; i < 15; i++) {
+        for (var i = 0; i < 3; i++) {
             var newGuest = new Guest("Guest " + i, hotel);
             newGuest.start();
         }

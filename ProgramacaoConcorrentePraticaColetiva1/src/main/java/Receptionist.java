@@ -12,7 +12,15 @@ public class Receptionist extends Thread {
     public void giveKeys(Room room, Guest guest) {
         room.guests.add(guest);  // add guest to a room
         guest.currentRoom = room; //  att quest's current room
-        hotel.occupiedRooms.add(room); // add the room to the accupied
+        hotel.occupiedRooms.add(room); // add the room to the occupied
+    }
+
+    public void receiveKeys(Room room, Guest guest) {
+        room.guests.remove(guest);
+    }
+
+     public void returnKey(Room room, Guest guest) {
+        room.guests.add(guest);
     }
 
     @Override

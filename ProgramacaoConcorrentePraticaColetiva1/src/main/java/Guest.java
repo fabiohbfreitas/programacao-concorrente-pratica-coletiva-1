@@ -15,7 +15,7 @@ public class Guest extends Thread {
         System.out.println(this.getName() + " arrived.");
         int waitTimes = 0;
         int n = 0;
-        while(true) {
+        while (true) {
             try {
                 if (hotel.finished.get()) {
                     break;
@@ -27,7 +27,8 @@ public class Guest extends Thread {
                     }
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(500));
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
-                    n+=1;
+                    n += 1;
+
                     continue;
                 }
 
@@ -37,13 +38,19 @@ public class Guest extends Thread {
                 }
                 if (hotel.isWaiting(this)) {
                     waitTimes++;
-                    System.out.println(this.getName() + " Goes for a walk in the city...");
+                    System.out.println(this.getName() + " Goes fo a walk and will try again later...");
                     Thread.sleep(1000 + ThreadLocalRandom.current().nextInt(1000));
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
 
         }
+
     }
+
+
+
+
+
 }

@@ -13,8 +13,10 @@ public class Maid extends Thread{
         try {
             System.out.println(this.getName() + " is cleaning " + room.name);
             Thread.sleep(ThreadLocalRandom.current().nextInt(2000));
-            available.add(room);
-            System.out.println(this.getName() + " finished cleaning " + room.name);
+            if(!hotel.occupiedRooms.contains(room)){ // if the room is occupied and dirty the guest is out
+                available.add(room);
+                System.out.println(this.getName() + " finished cleaning " + room.name);
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -30,6 +32,5 @@ public class Maid extends Thread{
                 System.err.println(e.getMessage());
             }
         }
-
     }
 }
