@@ -5,18 +5,20 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Guest extends Thread {
     Hotel hotel;
     Room currentRoom;
+    int familyID;
     Lock lock;
 
-    public Guest(String name, Hotel hotel) {
+    public Guest(String name, Hotel hotel,int familyID) {
         super(name);
         this.hotel = hotel;
+        this.familyID = familyID;
         lock = new ReentrantLock(true);
     }
 
     @Override
     public void run() {
         hotel.arrive(this);
-        System.out.println(this.getName() + " arrived.");
+        System.out.println(this.getName() + " from family "+ this.familyID + " arrived.");
         int waitTimes = 0;
         int n = 0;
 

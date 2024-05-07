@@ -1,9 +1,13 @@
+import java.util.Random;
+
 public class Main {
+	private static final int MIN_FAMILY_SIZE = 2;
+	private static final int MAX_FAMILY_SIZE = 6;
+			
     public static void main(String[] args) {
         var hotel = new Hotel();
         for (var i = 0; i < 3; i++) {
-            var newGuest = new Guest("Guest " + i, hotel);
-            newGuest.start();
+        	createFamily(i, hotel);
         }
 
         try {
@@ -37,4 +41,24 @@ public class Main {
             System.err.println(e.getMessage());
         }
     }
+    
+  //MARK: Returns a random family size
+  	public static int randomFamilySize(){
+  		Random random = new Random();
+  		int randomNum;
+  		randomNum = random.nextInt(MAX_FAMILY_SIZE + 1) + MIN_FAMILY_SIZE; //  Random integer in range of MIN_FAMILY_SIZE -> MAX_FAMILY_SIZE
+
+  		return randomNum;
+  	}
+  	
+	//MARK: Returns an array of guests (family)
+	public static  void createFamily(int familyNum, Hotel hotel) {
+		int familySize = randomFamilySize();
+		
+		for (var i = 0; i < familySize; i++) {
+			var newGuest = new Guest("Guest " + i, hotel, familyNum); // Creates a new guest
+			newGuest.start();
+		}
+		
+	}
 }
