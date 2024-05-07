@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Room {
@@ -7,6 +7,5 @@ public class Room {
 
     public Room(String id) {
         this.name = id;
-        this.guests = new ArrayList<>();
     }
 }

@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -11,7 +13,7 @@ public class Main {
 
 		for (var i = 0; i < 10; i++) {
 			var newfamily = createFamily(i, hotel);
-			
+			newfamily.run();
 		}
 
 		try {
@@ -19,7 +21,7 @@ public class Main {
 			System.out.println("================================");
 			System.out.println("Waiting: ");
 			for (var a : hotel.waitQueue) {
-				System.out.println("  "+a.getName());
+				System.out.println("  "+ a.getName());
 			}
 
 			System.out.println("In Rooms:");
@@ -55,14 +57,16 @@ public class Main {
 		return randomNum;
 	}
 	
-	//MARK: Returns an array of guests (family)
-	public static Guest[] createFamily(int familyNum, Hotel hotel) {
+	//MARK: Returns a family of guests 
+	public static Family createFamily(int familyNum, Hotel hotel) {
 		int familySize = randomFamilySize();
-		Guest[] newFamily = new Guest[familySize];
+		Family newFamily = new Family(familyNum, hotel);
 		
 		for (var i = 0; i < familySize; i++) {
-			var newGuest = new Guest("Guest " + i + "from family" + familyNum, hotel); // Creates a new guest
-			newFamily[i] = newGuest; // appends new guest to it's family
+			var newGuest = new Guest("Guest " + i + " from family " + familyNum, hotel); // Creates a new guest
+			System.out.println("Guest " + i + " from family " + familyNum + " arrived;");
+			newFamily.members.add(newGuest); // appends new guest to it's family
+			
 		}
 		
 		return newFamily;

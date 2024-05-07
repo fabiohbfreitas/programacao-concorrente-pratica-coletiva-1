@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Receptionist extends Thread {
     Hotel hotel;
 
@@ -6,9 +8,9 @@ public class Receptionist extends Thread {
         this.hotel = hotel;
     }
 
-    public void giveKeys(Room room, Guest guest) {
-        room.guests.add(guest);
-        guest.currentRoom = room;
+    public void giveKeys(Room room, Family family) {
+        room.guests = (family.members);
+        family.currentRoom = room;
         hotel.occupiedRooms.add(room);
     }
 

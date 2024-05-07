@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Hotel {
     Lock lock;
-    Queue<Guest> waitQueue;
+    Queue<Family> waitQueue;
     int complaints;
     Queue<Room> availableRooms;
     List<Room> occupiedRooms;
@@ -42,15 +42,15 @@ public class Hotel {
         }
     }
 
-    public void arrive(Guest guest) {
+    public void arrive(Family family) {
         lock.lock();
-        waitQueue.add(guest);
+        waitQueue.add(family);
         lock.unlock();
     }
 
-    public boolean isWaiting(Guest guest) {
+    public boolean isWaiting(Family family) {
         lock.lock();
-        if (waitQueue.contains(guest)) {
+        if (waitQueue.contains(family)) {
             lock.unlock();
             return true;
         }
@@ -58,11 +58,11 @@ public class Hotel {
         return false;
     }
 
-    public void leave(Guest guest) {
+    public void leave(Family family) {
         lock.lock();
-        waitQueue.remove(guest);
+        waitQueue.remove(family);
         complaints += 1;
-        System.out.println(guest.getName() + " left a complaint.");
+        System.out.println("Family " + family.familyID + " left a complaint.");
         lock.unlock();
     }
 
@@ -77,10 +77,10 @@ public class Hotel {
     public void checkRoomAndGuest(Receptionist receptionist) {
         lock.lock();
         if (!waitQueue.isEmpty() && !availableRooms.isEmpty()) {
-            var guest = waitQueue.poll();
+            var family = waitQueue.poll();
             var room = availableRooms.poll();
-            receptionist.giveKeys(room,guest);
-            System.out.println(receptionist.getName() + " gave the room " + room.name + " to " + guest.getName());
+            receptionist.giveKeys(room, family);
+            System.out.println(receptionist.getName() + " gave the room " + room.name + " to family " + family.familyID);
         }
         lock.unlock();
     }
