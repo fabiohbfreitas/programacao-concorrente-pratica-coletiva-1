@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -14,6 +13,7 @@ public class Hotel {
     Queue<Room> availableRooms;
     List<Room> occupiedRooms;
     Queue<Room> awaitingCleaning;
+    Queue<Guest> awaitingCityGuests;
 
     public AtomicBoolean finished = new AtomicBoolean(false);
 
@@ -24,6 +24,7 @@ public class Hotel {
         availableRooms = createRooms();
         occupiedRooms = new ArrayList<>();
         awaitingCleaning = new LinkedList<>();
+        awaitingCityGuests = new LinkedList<>();
 
         startReceptionists();
         startMaids();
@@ -83,6 +84,27 @@ public class Hotel {
             receptionist.giveKeys(room,guest);
             System.out.println(receptionist.getName() + " gave the room " + room.name + " to " + guest.getName());
         }
+
+        lock.unlock();
+    }
+
+    public void checkCityGuests(Receptionist receptionist) {
+        lock.lock();
+        if (!awaitingCityGuests.isEmpty()) {
+            var guest = awaitingCityGuests.poll();
+            var currentRoom = guest.currentRoom;
+            if(!awaitingCleaning.contains(currentRoom)) {
+                receptionist.giveKeys(currentRoom,guest);
+                System.out.println(receptionist.getName() + " return the room " + currentRoom.name + "keys to " + guest.getName());
+            }
+        }
+        lock.unlock();
+    }
+
+    public void receptionStoreKeys(Room room, Guest guest) {
+        lock.lock();
+        awaitingCleaning.add(guest.currentRoom);
+        room.guests.remove(guest);
         lock.unlock();
     }
 
@@ -94,36 +116,6 @@ public class Hotel {
         guest.currentRoom = null;
         System.out.println(guest.getName() + " checked out from " + guestRoom.name);
         lock.unlock();
-    }
-
-    public void returnToRoom(Guest guest) {
-        lock.lock();
-        try {
-            while (awaitingCleaning.contains(guest.currentRoom)) {
-                System.out.println(guest.getName() + " returns to their room, but it's still awaiting cleaning. Waiting...");
-                try {
-                    Thread.sleep(2000); // Wait for 2 seconds before trying again
-                } catch (InterruptedException e) {
-                    System.err.println(e.getMessage());
-                    Thread.currentThread().interrupt(); // Re-interrupt the thread
-                }
-            }
-            guest.currentRoom.guests.add(guest);
-            System.out.println(guest.getName() + " returns to their room.");
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public void goesForWalk(Guest guest)  {
-        try {
-            awaitingCleaning.add(guest.currentRoom);
-            System.out.println(guest.getName() + "Goes for a walk in the city...");
-            guest.currentRoom.guests.remove(guest);
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
     }
 
 

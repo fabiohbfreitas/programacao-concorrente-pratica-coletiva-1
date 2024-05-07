@@ -15,8 +15,8 @@ public class Maid extends Thread{
             Thread.sleep(ThreadLocalRandom.current().nextInt(2000));
             if(!hotel.occupiedRooms.contains(room)){ // if the room is occupied and dirty the guest is out
                 available.add(room);
-                System.out.println(this.getName() + " finished cleaning " + room.name);
             }
+            System.out.println(this.getName() + " finished cleaning " + room.name);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

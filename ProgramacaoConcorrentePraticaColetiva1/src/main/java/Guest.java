@@ -28,7 +28,8 @@ public class Guest extends Thread {
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(500));
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
                     n += 1;
-
+                    Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
+                    goesForWalk(this);
                     continue;
                 }
 
@@ -44,11 +45,23 @@ public class Guest extends Thread {
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
-
         }
 
     }
 
+ public void goesForWalk(Guest guest)  {
+        try {
+            hotel.awaitingCityGuests.add(guest);
+            System.out.println(guest.getName() + "Goes for a walk in the city...");
+
+           hotel.receptionStoreKeys(guest.currentRoom, guest);
+            Thread.sleep(2000);
+
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
 
 
