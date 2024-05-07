@@ -62,7 +62,7 @@ public class Guest extends Thread {
             lock.lock();
             Thread.sleep(500 + ThreadLocalRandom.current().nextInt(5000));
             hotel.awaitingCityGuests.add(guest);
-            System.out.println(guest.getName() + "Goes for a walk in the city...");
+            System.out.println(guest.getName() + " goes for a walk in the city...");
 
             hotel.receptionStoreKeys(guest.currentRoom, guest);
             Thread.sleep(2000);
@@ -71,8 +71,4 @@ public class Guest extends Thread {
             System.err.println(e.getMessage());
         }
     }
-
-
-
-
 }

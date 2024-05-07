@@ -95,7 +95,7 @@ public class Hotel {
             var currentRoom = guest.currentRoom;
             if(!awaitingCleaning.contains(currentRoom)) {
                 receptionist.giveKeys(currentRoom,guest);
-                System.out.println(receptionist.getName() + " return the room " + currentRoom.name + "keys to " + guest.getName());
+                System.out.println(receptionist.getName() + " return the " + currentRoom.name + " keys to " + guest.getName());
             }
         }
         lock.unlock();
