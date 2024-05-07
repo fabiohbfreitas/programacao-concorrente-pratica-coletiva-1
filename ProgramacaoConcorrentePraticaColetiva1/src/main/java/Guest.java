@@ -5,11 +5,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Guest extends Thread {
     Hotel hotel;
     Room currentRoom;
+    int familyID;
     Lock lock;
 
-    public Guest(String name, Hotel hotel) {
+    public Guest(String name, Hotel hotel,int familyID) {
         super(name);
         this.hotel = hotel;
+        this.familyID = familyID;
         lock = new ReentrantLock(true);
     }
 
