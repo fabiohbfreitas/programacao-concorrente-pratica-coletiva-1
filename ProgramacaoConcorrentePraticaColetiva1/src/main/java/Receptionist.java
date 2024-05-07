@@ -1,3 +1,6 @@
+ //O hotel deve contar com vários recepcionistas, que trabalham juntos e que devem alocar hóspedes
+ //apenas em quartos vagos
+
 public class Receptionist extends Thread {
     Hotel hotel;
 
@@ -7,14 +10,14 @@ public class Receptionist extends Thread {
     }
 
     public void giveKeys(Room room, Guest guest) {
-        room.guests.add(guest);
-        guest.currentRoom = room;
-        hotel.occupiedRooms.add(room);
+        room.guests.add(guest);  // add guest to a room
+        guest.currentRoom = room; //  att quest's current room
+        hotel.occupiedRooms.add(room); // add the room to the accupied
     }
 
     @Override
     public void run() {
-        while (!hotel.finished.get()) {
+        while (!hotel.finished.get()) // AtomicBoolean {
             try {
 //                System.out.println(this.getName() + " checking wait queue");
                 hotel.checkRoomAndGuest(this);
@@ -25,4 +28,4 @@ public class Receptionist extends Thread {
             }
         }
     }
-}
+

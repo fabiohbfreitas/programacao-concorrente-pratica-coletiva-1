@@ -77,7 +77,7 @@ public class Hotel {
     public void checkRoomAndGuest(Receptionist receptionist) {
         lock.lock();
         if (!waitQueue.isEmpty() && !availableRooms.isEmpty()) {
-            var guest = waitQueue.poll();
+            var guest = waitQueue.poll(); // returns and removes the first
             var room = availableRooms.poll();
             receptionist.giveKeys(room,guest);
             System.out.println(receptionist.getName() + " gave the room " + room.name + " to " + guest.getName());
