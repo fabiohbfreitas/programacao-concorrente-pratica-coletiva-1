@@ -18,7 +18,7 @@ public class Guest extends Thread {
     @Override
     public void run() {
         hotel.arrive(this);
-        System.out.println(this.getName() + " from family "+ this.familyID + " arrived.");
+        System.out.println(this.getName() + " arrived.");
         int waitTimes = 0;
         int n = 0;
 

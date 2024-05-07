@@ -56,7 +56,7 @@ public class Main {
 		int familySize = randomFamilySize();
 		
 		for (var i = 0; i < familySize; i++) {
-			var newGuest = new Guest("Guest " + i, hotel, familyNum); // Creates a new guest
+			var newGuest = new Guest("Guest " + i + " from family " + familyNum, hotel, familyNum); // Creates a new guest
 			newGuest.start();
 		}
 		
