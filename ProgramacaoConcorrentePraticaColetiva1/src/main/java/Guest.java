@@ -37,7 +37,7 @@ public class Guest extends Thread {
                 }
                 if (hotel.isWaiting(this)) {
                     waitTimes++;
-                    System.out.println(this.getName() + " Goes for a walk in the city...");
+                    System.out.println(this.getName() + " waiting...");
                     Thread.sleep(1000 + ThreadLocalRandom.current().nextInt(1000));
                 }
             }catch (Exception e) {
