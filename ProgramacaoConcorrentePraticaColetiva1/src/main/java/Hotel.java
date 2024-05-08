@@ -162,8 +162,17 @@ public class Hotel {
     } finally {
         lock.unlock();
     }
+    }
+    public void addFamilyToCityGuests(String familyID) {
+    for (Room room : occupiedRooms) {
+        for (Guest guest : room.guests) {
+            if (guest.familyID != null && guest.familyID.equals(familyID)) {
+                System.out.println(guest.getName() + " goes for a walk in the city...");
+                awaitingCityGuests.add(guest);
+            }
+        }
+    }
 }
-
 
     public void receptionStoreKeys(Room room, Guest guest) {
         lock.lock();
@@ -182,11 +191,13 @@ public class Hotel {
             guest.currentRoom = null;
             System.out.println(guest.getName() + " checked out from " + guestRoom.name);
         } else {
+
             var rooms = familyRooms.get(guest.familyID);
             guest.currentRoom = null;
             for (var room : rooms) {
                 for (var familyGuest: room.guests) {
                     familyGuest.currentRoom = null;
+
                     System.out.println(familyGuest.getName() + " ("+ familyGuest.familyID+") " + " checked out from " + room.name);
                 }
                 occupiedRooms.remove(room);

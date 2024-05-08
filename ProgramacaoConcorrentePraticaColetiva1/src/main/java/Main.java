@@ -6,7 +6,7 @@ public class Main {
 			
     public static void main(String[] args) {
         var hotel = new Hotel();
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 1; i++) {
             var newGuest = new Guest("Guest " + i, hotel);
             newGuest.start();
         }
@@ -22,7 +22,7 @@ public class Main {
         g14.start();
 
         try {
-            Thread.sleep(45000);
+            Thread.sleep(30000);
             System.out.println("================================");
             System.out.println("Waiting: ");
             for (var a : hotel.waitQueue) {

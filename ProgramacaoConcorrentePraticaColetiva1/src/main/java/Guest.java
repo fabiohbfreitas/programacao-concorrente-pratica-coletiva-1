@@ -34,17 +34,17 @@ public class Guest extends Thread {
                     break;
                 }
                 if (currentRoom != null) {
-                    if (n > 1 && !currentRoom.guests.isEmpty()) {
+                    if (n > 1) {
                         hotel.checkout(this);
                         break;
                     }
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(500));
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
                     // TODO: FAMILIA TODA DEVE SAIR
-//                    Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
-//                    if (!this.currentRoom.guests.isEmpty() && n < 1){
-//                        goesForWalk(this);
-//                    }
+                    Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
+                    if (!this.currentRoom.guests.isEmpty() && n < 1){
+                        goesForWalk(this);
+                    }
                     n += 1;
                     waitTimes = 0;
                     continue;
@@ -72,8 +72,16 @@ public class Guest extends Thread {
         try {
             lock.lock();
             Thread.sleep(500 + ThreadLocalRandom.current().nextInt(5000));
-            hotel.awaitingCityGuests.add(guest);
-            System.out.println(guest.getName() + " goes for a walk in the city...");
+
+            if (familyID != null) {
+                hotel.addFamilyToCityGuests(familyID);
+                System.out.println("aaaa");
+            } else {
+                hotel.awaitingCityGuests.add(guest);
+                System.out.println(guest.getName() + " goes for a walk in the city...");
+            }
+
+
 
             hotel.receptionStoreKeys(guest.currentRoom, guest);
             Thread.sleep(2000);
