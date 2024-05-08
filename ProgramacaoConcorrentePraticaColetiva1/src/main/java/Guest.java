@@ -75,15 +75,12 @@ public class Guest extends Thread {
 
             if (familyID != null) {
                 hotel.addFamilyToCityGuests(familyID);
-                System.out.println("aaaa");
             } else {
                 hotel.awaitingCityGuests.add(guest);
+                hotel.receptionStoreKeys(guest.currentRoom, guest);
                 System.out.println(guest.getName() + " goes for a walk in the city...");
             }
 
-
-
-            hotel.receptionStoreKeys(guest.currentRoom, guest);
             Thread.sleep(2000);
             lock.unlock();
         } catch (Exception e) {

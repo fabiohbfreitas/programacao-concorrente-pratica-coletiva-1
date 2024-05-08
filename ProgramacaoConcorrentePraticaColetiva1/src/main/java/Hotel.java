@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -163,12 +164,21 @@ public class Hotel {
         lock.unlock();
     }
     }
+
     public void addFamilyToCityGuests(String familyID) {
     for (Room room : occupiedRooms) {
+
+
+
         for (Guest guest : room.guests) {
+         System.out.println(room.name);
+//            System.out.println(room.guests);
+
+
             if (guest.familyID != null && guest.familyID.equals(familyID)) {
                 System.out.println(guest.getName() + " goes for a walk in the city...");
                 awaitingCityGuests.add(guest);
+                receptionStoreKeys(guest.currentRoom, guest);
             }
         }
     }
