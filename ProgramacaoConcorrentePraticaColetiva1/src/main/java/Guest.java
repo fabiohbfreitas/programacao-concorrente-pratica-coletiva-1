@@ -5,10 +5,16 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Guest extends Thread {
     Hotel hotel;
     Room currentRoom;
-    int familyID;
     Lock lock;
+    String familyID;
 
-    public Guest(String name, Hotel hotel,int familyID) {
+    public Guest(String name, Hotel hotel) {
+        super(name);
+        this.hotel = hotel;
+        lock = new ReentrantLock(true);
+    }
+
+    public Guest(String name, Hotel hotel, String familyID) {
         super(name);
         this.hotel = hotel;
         this.familyID = familyID;
@@ -34,12 +40,13 @@ public class Guest extends Thread {
                     }
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(500));
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
-
-                    Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
-                    if (!this.currentRoom.guests.isEmpty() && n < 1){
-                        goesForWalk(this);
-                    }
-                      n += 1;
+                    // TODO: FAMILIA TODA DEVE SAIR
+//                    Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
+//                    if (!this.currentRoom.guests.isEmpty() && n < 1){
+//                        goesForWalk(this);
+//                    }
+                    n += 1;
+                    waitTimes = 0;
                     continue;
                 }
 

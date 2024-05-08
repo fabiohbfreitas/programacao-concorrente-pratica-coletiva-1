@@ -1,17 +1,28 @@
 import java.util.Random;
 
 public class Main {
-	private static final int MIN_FAMILY_SIZE = 2;
-	private static final int MAX_FAMILY_SIZE = 6;
+//	private static final int MIN_FAMILY_SIZE = 2;
+//	private static final int MAX_FAMILY_SIZE = 6;
 			
     public static void main(String[] args) {
         var hotel = new Hotel();
-        for (var i = 0; i < 3; i++) {
-        	createFamily(i, hotel);
+        for (var i = 0; i < 10; i++) {
+            var newGuest = new Guest("Guest " + i, hotel);
+            newGuest.start();
         }
+        var g10 = new Guest("Guest 10", hotel, "A");
+        g10.start();
+        var g11 = new Guest("Guest 11", hotel,"A");
+        g11.start();
+        var g12 = new Guest("Guest 12", hotel,"A");
+        g12.start();
+        var g13 = new Guest("Guest 13", hotel,"A");
+        g13.start();
+        var g14 = new Guest("Guest 14", hotel,"A");
+        g14.start();
 
         try {
-            Thread.sleep(35000);
+            Thread.sleep(45000);
             System.out.println("================================");
             System.out.println("Waiting: ");
             for (var a : hotel.waitQueue) {
@@ -43,22 +54,22 @@ public class Main {
     }
     
   //MARK: Returns a random family size
-  	public static int randomFamilySize(){
-  		Random random = new Random();
-  		int randomNum;
-  		randomNum = random.nextInt(MAX_FAMILY_SIZE + 1) + MIN_FAMILY_SIZE; //  Random integer in range of MIN_FAMILY_SIZE -> MAX_FAMILY_SIZE
-
-  		return randomNum;
-  	}
+//  	public static int randomFamilySize(){
+//  		Random random = new Random();
+//  		int randomNum;
+//  		randomNum = random.nextInt(MAX_FAMILY_SIZE + 1) + MIN_FAMILY_SIZE; //  Random integer in range of MIN_FAMILY_SIZE -> MAX_FAMILY_SIZE
+//
+//  		return randomNum;
+//  	}
   	
 	//MARK: Create new guests and assign them a family ID 
-	public static  void createFamily(int familyNum, Hotel hotel) {
-		int familySize = randomFamilySize();
-		
-		for (var i = 0; i < familySize; i++) {
-			var newGuest = new Guest("Guest " + i + " from family " + familyNum, hotel, familyNum); // Creates a new guest
-			newGuest.start();
-		}
-		
-	}
+//	public static  void createFamily(int familyNum, Hotel hotel) {
+//		int familySize = randomFamilySize();
+//
+//		for (var i = 0; i < familySize; i++) {
+//			var newGuest = new Guest("Guest " + i + " from family " + familyNum, hotel, familyNum); // Creates a new guest
+//			newGuest.start();
+//		}
+//
+//	}
 }
