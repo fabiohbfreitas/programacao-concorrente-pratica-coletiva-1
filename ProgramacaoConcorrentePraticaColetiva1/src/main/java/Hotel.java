@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +13,7 @@ public class Hotel {
     Queue<Room> availableRooms;
     List<Room> occupiedRooms;
     Queue<Room> awaitingCleaning;
-    Queue<Guest> awaitingCityGuests;
+    Queue<Guest> awaitingInCityGuests;
     Multimap<String, Room> familyRooms;
     public AtomicBoolean finished = new AtomicBoolean(false);
 
@@ -25,7 +24,7 @@ public class Hotel {
         availableRooms = createRooms();
         occupiedRooms = new ArrayList<>();
         awaitingCleaning = new LinkedList<>();
-        awaitingCityGuests = new LinkedList<>();
+        awaitingInCityGuests = new LinkedList<>();
         familyRooms = new Multimap<>();
 
         startReceptionists();
@@ -152,12 +151,12 @@ public class Hotel {
     public void assignRoomKeysToCityGuests(Receptionist receptionist) {
     lock.lock();
     try {
-        if (!awaitingCityGuests.isEmpty()) {
-            var guest = awaitingCityGuests.element();
+        if (!awaitingInCityGuests.isEmpty()) {
+            var guest = awaitingInCityGuests.element();
             if (!awaitingCleaning.contains(guest.currentRoom)) {
                 receptionist.giveKeys(guest.currentRoom, guest);
                 System.out.println(receptionist.getName() + " returned the keys to " + guest.getName() + " for room " + guest.currentRoom.name);
-                awaitingCityGuests.remove(guest);
+                awaitingInCityGuests.remove(guest);
             }
         }
     } finally {
@@ -168,8 +167,6 @@ public class Hotel {
     public void addFamilyToCityGuests(String familyID) {
     for (Room room : occupiedRooms) {
 
-
-
         for (Guest guest : room.guests) {
          System.out.println(room.name);
 //            System.out.println(room.guests);
@@ -177,7 +174,7 @@ public class Hotel {
 
             if (guest.familyID != null && guest.familyID.equals(familyID)) {
                 System.out.println(guest.getName() + " goes for a walk in the city...");
-                awaitingCityGuests.add(guest);
+                awaitingInCityGuests.add(guest);
                 receptionStoreKeys(guest.currentRoom, guest);
             }
         }
