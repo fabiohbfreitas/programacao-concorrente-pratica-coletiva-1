@@ -25,10 +25,10 @@
          var secondRoom = rooms.get(1);
          for (var currentGuest: guest) {
              if (firstRoom.guests.size() < Room.MAX_GUESTS) {
-                 firstRoom.guests.add(currentGuest);
+//                 firstRoom.guests.add(currentGuest);
                  currentGuest.currentRoom = firstRoom;
              } else {
-                 secondRoom.guests.add(currentGuest);
+//                 secondRoom.guests.add(currentGuest);
                  currentGuest.currentRoom = secondRoom;
              }
          }
@@ -42,8 +42,8 @@
                 Thread.sleep(1800 + ThreadLocalRandom.current().nextInt(500));
                 hotel.checkRoomAndGuest(this);
                 // TODO: FAMILIA TODA DEVE VOLTAR
-//                hotel.assignRoomKeysToCityGuests(this);
-//                Thread.sleep(400);
+                hotel.assignRoomKeysToCityGuests(this);
+                Thread.sleep(400);
 
             } catch (Exception e) {
                 System.err.println(e.getMessage());

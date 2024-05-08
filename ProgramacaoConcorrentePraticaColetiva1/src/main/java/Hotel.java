@@ -140,10 +140,12 @@ public class Hotel {
         var firstRoom = availableRooms.poll();
         familyRooms.put(id, firstRoom);
         rooms.add(firstRoom);
+        occupiedRooms.add(firstRoom);
         if (familySize <= Room.MAX_GUESTS) {
             var secondRoom = availableRooms.poll();
             rooms.add(secondRoom);
             familyRooms.put(id, secondRoom);
+            occupiedRooms.add(secondRoom);
         }
         return rooms;
     }
@@ -154,9 +156,15 @@ public class Hotel {
         if (!awaitingInCityGuests.isEmpty()) {
             var guest = awaitingInCityGuests.element();
             if (!awaitingCleaning.contains(guest.currentRoom)) {
-                receptionist.giveKeys(guest.currentRoom, guest);
-                System.out.println(receptionist.getName() + " returned the keys to " + guest.getName() + " for room " + guest.currentRoom.name);
-                awaitingInCityGuests.remove(guest);
+                if(guest.familyID == null) {
+                    receptionist.giveKeys(guest.currentRoom, guest);
+                    System.out.println(receptionist.getName() + " returned the keys to " + guest.getName() + " for room " + guest.currentRoom.name);
+                    awaitingInCityGuests.remove(guest);
+                } else {
+                    for (Room rooms :occupiedRooms){
+                        System.out.println("dasdasdasd"); // TODO: Make family goes back
+                    }
+                }
             }
         }
     } finally {
@@ -166,12 +174,8 @@ public class Hotel {
 
     public void addFamilyToCityGuests(String familyID) {
     for (Room room : occupiedRooms) {
-
         for (Guest guest : room.guests) {
          System.out.println(room.name);
-//            System.out.println(room.guests);
-
-
             if (guest.familyID != null && guest.familyID.equals(familyID)) {
                 System.out.println(guest.getName() + " goes for a walk in the city...");
                 awaitingInCityGuests.add(guest);
@@ -184,7 +188,7 @@ public class Hotel {
     public void receptionStoreKeys(Room room, Guest guest) {
         lock.lock();
         awaitingCleaning.add(guest.currentRoom);
-        room.guests.remove(guest);
+//        room.guests.remove(guest);
         lock.unlock();
     }
 
