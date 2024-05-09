@@ -25,10 +25,10 @@
          var secondRoom = rooms.get(1);
          for (var currentGuest: guest) {
              if (firstRoom.guests.size() < Room.MAX_GUESTS) {
-//                 firstRoom.guests.add(currentGuest);
+                 firstRoom.guests.add(currentGuest);
                  currentGuest.currentRoom = firstRoom;
              } else {
-//                 secondRoom.guests.add(currentGuest);
+                 secondRoom.guests.add(currentGuest);
                  currentGuest.currentRoom = secondRoom;
              }
          }

@@ -206,6 +206,7 @@ public class Hotel {
             var rooms = familyRooms.get(guest.familyID);
             guest.currentRoom = null;
             for (var room : rooms) {
+
                 for (var familyGuest: room.guests) {
                     familyGuest.currentRoom = null;
 
