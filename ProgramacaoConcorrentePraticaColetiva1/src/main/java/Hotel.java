@@ -162,7 +162,7 @@ public class Hotel {
                     awaitingInCityGuests.remove(guest);
                 } else {
                     for (Room rooms :occupiedRooms){
-                        System.out.println("dasdasdasd"); // TODO: Make family goes back
+                        System.out.println("family goes back to room"); // TODO: Make family goes back
                     }
                 }
             }
