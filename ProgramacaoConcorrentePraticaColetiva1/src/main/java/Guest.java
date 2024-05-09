@@ -42,7 +42,7 @@ public class Guest extends Thread {
                     System.out.println(this.getName() + " is inside " + currentRoom.name);
                     // TODO: FAMILIA TODA DEVE SAIR
                     Thread.sleep(1500 + ThreadLocalRandom.current().nextInt(1000));
-                    if (!this.currentRoom.guests.isEmpty() && n < 1){
+                    if (/*!this.currentRoom.guests.isEmpty()&& */ n < 1){
                         goesForWalk(this);
                     }
                     n += 1;
@@ -74,7 +74,7 @@ public class Guest extends Thread {
             Thread.sleep(500 + ThreadLocalRandom.current().nextInt(5000));
 
             if (familyID != null) {
-                hotel.addFamilyToCityGuests(familyID);
+//                hotel.addFamilyToCityGuests(familyID);
             } else {
                 hotel.awaitingInCityGuests.add(guest);
                 hotel.receptionStoreKeys(guest.currentRoom, guest);

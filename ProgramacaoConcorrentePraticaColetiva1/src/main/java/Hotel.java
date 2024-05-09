@@ -173,10 +173,10 @@ public class Hotel {
     }
 
     public void addFamilyToCityGuests(String familyID) {
+
     for (Room room : occupiedRooms) {
         for (Guest guest : room.guests) {
-         System.out.println(room.name);
-            if (guest.familyID != null && guest.familyID.equals(familyID)) {
+            if (guest.familyID.equals(familyID)) {
                 System.out.println(guest.getName() + " goes for a walk in the city...");
                 awaitingInCityGuests.add(guest);
                 receptionStoreKeys(guest.currentRoom, guest);

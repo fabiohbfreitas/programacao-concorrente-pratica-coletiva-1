@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fcc3e234-9c5e-4cf3-a296-1f79b443c06c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Guest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Hotel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Receptionist.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Receptionist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProgramacaoConcorrentePraticaColetiva1/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +30,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;family-goes-out&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/gabrieleirado/programacao-concorrente-pratica-coletiva-1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -73,6 +74,7 @@
       <workItem from="1715038372980" duration="2486000" />
       <workItem from="1715040868874" duration="22813000" />
       <workItem from="1715099081244" duration="1343000" />
+      <workItem from="1715192429110" duration="3984000" />
     </task>
     <servers />
   </component>
