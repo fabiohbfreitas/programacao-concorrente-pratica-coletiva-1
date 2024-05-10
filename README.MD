@@ -2,7 +2,7 @@
 
 ## Integrantes
 - Fábio Henrique Brito de Freitas - UC22100441
-- Gabriel Eirado
+- Gabriel Eirado Amaral - UC22200242
 - Daniel Ishida
 
 # Sobre o projeto
